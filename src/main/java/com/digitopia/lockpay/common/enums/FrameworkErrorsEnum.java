@@ -9,15 +9,19 @@ public enum FrameworkErrorsEnum implements BasicErrorsEnum {
 	/**
      * User ID Not Found in the request header
      */
-	USER_ID_NOT_FOUND("LP99990", HTTPStatusCodesEnum.BAD_REQUEST, "user id not found"),
+	PROFILE_ID_NOT_FOUND("LP99990", HTTPStatusCodesEnum.BAD_REQUEST, "profile id not found"),
 	/**
      * Request ID Not Found in the request header
      */
-	REQUEST_ID_NOT_FOUND("LP99991", HTTPStatusCodesEnum.BAD_REQUEST, "request id not found"),
+	SESSION_ID_NOT_FOUND("LP99991", HTTPStatusCodesEnum.BAD_REQUEST, "session id not found"),
 	/**
-     * Prefered Lan Not Found in the request header
+     * Request ID Not Found in the request header
      */
-	PREFERED_LANGUAGE_NOT_FOUND("LP99992", HTTPStatusCodesEnum.BAD_REQUEST, "prefered language not found");
+	LATITUDE_NOT_FOUND("LP99991", HTTPStatusCodesEnum.BAD_REQUEST, "latitude not found"),
+	/**
+     * Request ID Not Found in the request header
+     */
+	LONGITUDE_NOT_FOUND("LP99991", HTTPStatusCodesEnum.BAD_REQUEST, "longitude id not found");
 
 
 	private String errorCode;

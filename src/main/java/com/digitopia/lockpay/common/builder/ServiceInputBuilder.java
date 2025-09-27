@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.digitopia.lockpay.common.model.exception.HeaderNotFoundException;
 import com.digitopia.lockpay.common.model.request.ServiceInput;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -15,7 +14,6 @@ import lombok.Data;
  */
 @Service
 @Data
-@AllArgsConstructor
 public abstract class ServiceInputBuilder<T,E extends ServiceInput> {
 
 	protected ContextBuilder contextBuilder;

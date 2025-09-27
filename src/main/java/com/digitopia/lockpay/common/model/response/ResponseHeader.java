@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * Represent header object contained into response
  *
  */
-@JsonPropertyOrder({ "requestId", "status" })
+@JsonPropertyOrder({ "sessionId", "status" })
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
@@ -22,7 +22,7 @@ public class ResponseHeader {
 	private ResponseStatus status;
 
 	// Request Header sent into request
-	@JsonProperty("requestId")
-	private String requestId;
+	@JsonProperty("sessionId")
+	private String sessionId;
 
 }
