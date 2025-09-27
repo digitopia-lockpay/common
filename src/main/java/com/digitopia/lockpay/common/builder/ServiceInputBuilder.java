@@ -2,6 +2,7 @@ package com.digitopia.lockpay.common.builder;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.digitopia.lockpay.common.model.exception.HeaderNotFoundException;
@@ -16,6 +17,7 @@ import lombok.Data;
 @Data
 public abstract class ServiceInputBuilder<T,E extends ServiceInput> {
 
+	@Autowired
 	protected ContextBuilder contextBuilder;
 	
 	/**
