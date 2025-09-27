@@ -30,66 +30,28 @@ public class ContextBuilder {
 		ServiceContext serviceContext = new ServiceContext();
 		headers = manipulateHeader(headers);
 
-		if (headers.containsKey(HttpHeadersEnum.REQUEST_ID.getCode())) {
-			serviceContext.setRequestId(headers.get(HttpHeadersEnum.REQUEST_ID.getCode()));
-		} else {
-			throw new HeaderNotFoundException(FrameworkErrorsEnum.REQUEST_ID_NOT_FOUND);
-		}
-
-		if (headers.containsKey(HttpHeadersEnum.USER_ID.getCode())) {
-			serviceContext.setUserId(headers.get(HttpHeadersEnum.USER_ID.getCode()));
-		}
-
 		if (headers.containsKey(HttpHeadersEnum.SESSION_ID.getCode())) {
 			serviceContext.setSessionId(headers.get(HttpHeadersEnum.SESSION_ID.getCode()));
-		}
-		
-		if (headers.containsKey(HttpHeadersEnum.PREFERED_LANG.getCode())) {
-			serviceContext.setPeferredLang(headers.get(HttpHeadersEnum.PREFERED_LANG.getCode()));
 		} else {
-			throw new HeaderNotFoundException(FrameworkErrorsEnum.PREFERED_LANGUAGE_NOT_FOUND);
-		}
+			throw new HeaderNotFoundException(FrameworkErrorsEnum.SESSION_ID_NOT_FOUND);
+		} 
 
-		if (headers.containsKey(HttpHeadersEnum.CLIENT_ID.getCode())) {
-			serviceContext.setClientId(headers.get(HttpHeadersEnum.CLIENT_ID.getCode()));
-		}
-
-		if (headers.containsKey(HttpHeadersEnum.CLIENT_SECRET.getCode())) {
-			serviceContext.setClientSecret(headers.get(HttpHeadersEnum.CLIENT_SECRET.getCode()));
-		}
-
-		if (headers.containsKey(HttpHeadersEnum.DEVICE_ID.getCode())) {
-			serviceContext.setDeviceId(headers.get(HttpHeadersEnum.DEVICE_ID.getCode()));
-		}
-
-		if (headers.containsKey(HttpHeadersEnum.HOST_IP.getCode())) {
-			serviceContext.setHostIp(headers.get(HttpHeadersEnum.HOST_IP.getCode()));
-		}
-		
-		if (headers.containsKey(HttpHeadersEnum.CLIENT_IP.getCode())) {
-			serviceContext.setClientIp(headers.get(HttpHeadersEnum.CLIENT_IP.getCode()));
-		}
+		if (headers.containsKey(HttpHeadersEnum.PROFILE_ID.getCode())) {
+			serviceContext.setProfileId(headers.get(HttpHeadersEnum.PROFILE_ID.getCode()));
+		} 
 		
 		if (headers.containsKey(HttpHeadersEnum.LONGITUDE.getCode())) {
 			serviceContext.setLongitude(headers.get(HttpHeadersEnum.LONGITUDE.getCode()));
+		} else {
+			throw new HeaderNotFoundException(FrameworkErrorsEnum.LONGITUDE_NOT_FOUND);
 		}
 
 		if (headers.containsKey(HttpHeadersEnum.LATITUDE.getCode())) {
 			serviceContext.setLatitude(headers.get(HttpHeadersEnum.LATITUDE.getCode()));
+		} else {
+			throw new HeaderNotFoundException(FrameworkErrorsEnum.LATITUDE_NOT_FOUND);
 		}
 		
-		if (headers.containsKey(HttpHeadersEnum.APPLICATION_VERSION.getCode())) {
-			serviceContext.setApplicationVersion(headers.get(HttpHeadersEnum.APPLICATION_VERSION.getCode()));
-		}
-		
-		if (headers.containsKey(HttpHeadersEnum.PRINCIPLE_TYPE.getCode())) {
-			serviceContext.setPrincipleType(headers.get(HttpHeadersEnum.PRINCIPLE_TYPE.getCode()));
-		}
-		
-		if(headers.containsKey(HttpHeadersEnum.TWO_FA_VALIDATION.getCode())) {
-			serviceContext.setTwoFAValidation(headers.get(HttpHeadersEnum.TWO_FA_VALIDATION.getCode()));
-		}
-
 		return serviceContext;
 	}
 

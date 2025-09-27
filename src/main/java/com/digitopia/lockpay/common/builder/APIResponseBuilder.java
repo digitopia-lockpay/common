@@ -5,15 +5,13 @@ import org.springframework.stereotype.Component;
 import com.digitopia.lockpay.common.model.ServiceContext;
 import com.digitopia.lockpay.common.model.response.ResponseMessage;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Component
 @Data
-@AllArgsConstructor
 public abstract class APIResponseBuilder<T, E> {
 
-	protected ResponseBuilder responseBuilder;
+	protected ServiceResponseBuilder responseBuilder;
 
 	public ResponseMessage<E> buildServiceOutput(T serviceResponse, String requestId) {
 

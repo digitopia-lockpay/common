@@ -2,21 +2,10 @@ package com.digitopia.lockpay.common.enums;
 
 public enum HttpHeadersEnum {
 	
-	REQUEST_ID("x-request-id"),
 	SESSION_ID("x-session-id"),
-	USER_ID("x-principle-id"),
-	PREFERED_LANG("x-session-language"),
-	CLIENT_ID("x-client-id"),
-	CLIENT_SECRET("x-client-secret"),
-	DEVICE_ID("x-device-id"),
-	HOST_IP("x-host-ip"),
-	CLIENT_IP("x-client-ip"),
+	PROFILE_ID("x-profile-id"),
 	LATITUDE("x-latitude"), 
-	LONGITUDE("x-longitude"),
-	APPLICATION_VERSION("x-app-version"),
-	PRINCIPLE_TYPE("x-principle-type"),
-	TWO_FA_VALIDATION("x-2fa-validation"),
-	API_KEY("x-api-key");
+	LONGITUDE("x-longitude");
 		
 	private String code;
 

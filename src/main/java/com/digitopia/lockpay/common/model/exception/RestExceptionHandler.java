@@ -64,7 +64,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleExceptionInternal(Exception ex, @Nullable Object body, HttpHeaders headers,
 			HttpStatusCode status, WebRequest request) {
 		return buildResponseEntity(getResponseMessagForGeneralException(GeneralStatusEnum.GENERAL_ERROR,
-				request.getHeader(HttpHeadersEnum.REQUEST_ID.getCode())));
+				request.getHeader(HttpHeadersEnum.SESSION_ID.getCode())));
 	}
 
 	/**
@@ -82,10 +82,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		try {
 			return buildResponseEntity(getResponseMessageFromMessageNotReadableException(ex,
-					request.getHeader(HttpHeadersEnum.REQUEST_ID.getCode())));
+					request.getHeader(HttpHeadersEnum.SESSION_ID.getCode())));
 		} catch (Exception e) {
 			return buildResponseEntity(getResponseMessagForGeneralException(GeneralStatusEnum.GENERAL_ERROR,
-					request.getHeader(HttpHeadersEnum.REQUEST_ID.getCode())));
+					request.getHeader(HttpHeadersEnum.SESSION_ID.getCode())));
 		}
 	}
 	
@@ -103,7 +103,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex,
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		return buildResponseEntity(getResponseMessagForGeneralException(GeneralStatusEnum.MISSING_PARAM,
-				request.getHeader(HttpHeadersEnum.REQUEST_ID.getCode())));
+				request.getHeader(HttpHeadersEnum.SESSION_ID.getCode())));
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		return buildResponseEntity(getResponseMessageFromMethodNonValidtExpection(ex,
-				request.getHeader(HttpHeadersEnum.REQUEST_ID.getCode())));
+				request.getHeader(HttpHeadersEnum.SESSION_ID.getCode())));
 	}
 
 	@ExceptionHandler(BindException.class)
@@ -132,7 +132,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		MethodArgumentNotValidException methodArgumentNotValidException = new MethodArgumentNotValidException(null,
 				ex.getBindingResult());
 		return buildResponseEntity(getResponseMessageFromMethodNonValidtExpection(methodArgumentNotValidException,
-				request.getHeader(HttpHeadersEnum.REQUEST_ID.getCode())));
+				request.getHeader(HttpHeadersEnum.SESSION_ID.getCode())));
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleConstraintViolation(javax.validation.ConstraintViolationException ex,
 			WebRequest request) {
 		return buildResponseEntity(
-				getResponseMessageFromConstraintExpection(ex, request.getHeader(HttpHeadersEnum.REQUEST_ID.getCode())));
+				getResponseMessageFromConstraintExpection(ex, request.getHeader(HttpHeadersEnum.SESSION_ID.getCode())));
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler({ ApplicationException.class })
 	protected ResponseEntity<Object> handleApplicationExceptions(ApplicationException ex, WebRequest request) {
 		return buildResponseEntity(
-				getResponseMessageFromAppExpection(ex, request.getHeader(HttpHeadersEnum.REQUEST_ID.getCode())));
+				getResponseMessageFromAppExpection(ex, request.getHeader(HttpHeadersEnum.SESSION_ID.getCode())));
 	}
 
 	/**
@@ -179,21 +179,22 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 			System.out.println("E1");
 			log.error("Application error in: [" + e.getClass().getName() + "]", e);
 		}
+		
 		return buildResponseEntity(getResponseMessagForGeneralException(GeneralStatusEnum.GENERAL_ERROR,
-				request.getHeader(HttpHeadersEnum.REQUEST_ID.getCode())));
+				request.getHeader(HttpHeadersEnum.SESSION_ID.getCode())));
 	}
 
 	/**
 	 * Handle building Response object.
 	 *
 	 * @param ex        the ApplicationException
-	 * @param requestId represent request ID in message http header of the request
+	 * @param sessionId represent request ID in message http header of the request
 	 * @return the ResponseMessage object
 	 */
-	ResponseMessage<?> getResponseMessageFromAppExpection(ApplicationException ex, String requestId) {
+	ResponseMessage<?> getResponseMessageFromAppExpection(ApplicationException ex, String sessionId) {
 		ResponseMessage<?> resp = new ResponseMessage<>();
 		ResponseHeader respHeader = new ResponseHeader();
-		respHeader.setRequestId(requestId);
+		respHeader.setSessionId(sessionId);
 		ResponseStatus respStatus = new ResponseStatus();
 		respStatus.setCode(ex.getErrorCode());
 		respStatus.setDetails(ex.getDetails());
@@ -207,16 +208,16 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	 * Handle building Response object.
 	 *
 	 * @param ex        the ConstraintViolationException
-	 * @param requestId represent request ID in message http header of the request
+	 * @param sessionId represent request ID in message http header of the request
 	 * @return the ResponseMessage object
 	 */
 	ResponseMessage<?> getResponseMessageFromConstraintExpection(javax.validation.ConstraintViolationException ex,
-			String requestId) {
+			String sessionId) {
 
 		ResponseMessage<?> resp = new ResponseMessage<>();
 
 		ResponseHeader respHeader = new ResponseHeader();
-		respHeader.setRequestId(requestId);
+		respHeader.setSessionId(sessionId);
 
 		ResponseStatus respStatus = new ResponseStatus();
 
@@ -246,12 +247,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	 * @param ex
 	 */
 	private ResponseMessage<?> getResponseMessageFromMessageNotReadableException(HttpMessageNotReadableException ex,
-			String requestId) {
+			String sessionId) {
 
 		ResponseMessage<?> resp = new ResponseMessage<>();
 
 		ResponseHeader respHeader = new ResponseHeader();
-		respHeader.setRequestId(requestId);
+		respHeader.setSessionId(sessionId);
 
 		ResponseStatus respStatus = new ResponseStatus();
 		respStatus.setSubErrors(new ArrayList<>());
@@ -321,7 +322,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		ResponseMessage<?> resp = new ResponseMessage<>();
 
 		ResponseHeader respHeader = new ResponseHeader();
-		respHeader.setRequestId(requestId);
+		respHeader.setSessionId(requestId);
 
 		ResponseStatus respStatus = new ResponseStatus();
 
@@ -364,7 +365,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		ResponseMessage<?> resp = new ResponseMessage<>();
 
 		ResponseHeader respHeader = new ResponseHeader();
-		respHeader.setRequestId(requestId);
+		respHeader.setSessionId(requestId);
 
 		ResponseStatus respStatus = new ResponseStatus();
 
