@@ -1,5 +1,6 @@
 package com.digitopia.lockpay.common.builder;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.digitopia.lockpay.common.model.ServiceContext;
@@ -11,6 +12,7 @@ import lombok.Data;
 @Data
 public abstract class APIResponseBuilder<T, E> {
 
+	@Autowired
 	protected ServiceResponseBuilder responseBuilder;
 
 	public ResponseMessage<E> buildServiceOutput(T serviceResponse, String requestId) {
