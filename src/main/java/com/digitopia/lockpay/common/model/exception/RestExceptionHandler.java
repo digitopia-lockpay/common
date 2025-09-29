@@ -357,15 +357,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	 * Handle building Response object.
 	 *
 	 * @param e         Errors Enum
-	 * @param requestId represent request ID in message http header of the request
+	 * @param sessionId represent session ID in message http header of the request
 	 * @return the ResponseMessage object
 	 */
-	ResponseMessage<?> getResponseMessagForGeneralException(BasicErrorsEnum e, String requestId) {
+	ResponseMessage<?> getResponseMessagForGeneralException(BasicErrorsEnum e, String sessionId) {
 
 		ResponseMessage<?> resp = new ResponseMessage<>();
 
 		ResponseHeader respHeader = new ResponseHeader();
-		respHeader.setSessionId(requestId);
+		respHeader.setSessionId(sessionId);
 
 		ResponseStatus respStatus = new ResponseStatus();
 
